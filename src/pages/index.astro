@@ -1,81 +1,236 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import Card from '../components/Card.astro';
+import Layout from "../layouts/Layout.astro"
+import Card from "../components/Card.astro"
+
+import { templates, collections, patterns } from "../testdata"
 ---
 
-<Layout title="Welcome to Astro.">
-	<main>
-		<h1>Welcome to <span class="text-gradient">Astro</span></h1>
-		<p class="instructions">
-			To get started, open the directory <code>src/pages</code> in your project.<br />
-			<strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
-		</p>
-		<ul role="list" class="link-card-grid">
-			<Card
-				href="https://docs.astro.build/"
-				title="Documentation"
-				body="Learn how Astro works and explore the official API docs."
-			/>
-			<Card
-				href="https://astro.build/integrations/"
-				title="Integrations"
-				body="Supercharge your project with new frameworks and libraries."
-			/>
-			<Card
-				href="https://astro.build/themes/"
-				title="Themes"
-				body="Explore a galaxy of community-built starter themes."
-			/>
-			<Card
-				href="https://astro.build/chat/"
-				title="Community"
-				body="Come say hi to our amazing Discord community. ❤️"
-			/>
-		</ul>
-	</main>
+<Layout title="Prototyp Generator">
+  <main>
+    <div class="main-container">
+      <div class="parts-container">
+        <div class="parts-container__header">
+          <div class="parts-container__header__search">
+            <input type="text" placeholder="Search" />
+
+            <button>
+              Suchen
+              <!-- <img src="assets/img/search.svg" alt="search" /> -->
+            </button>
+          </div>
+        </div>
+
+        <div class="parts-container__body">
+          <div class="parts-section section-templates">
+            <h3>Vorlagen</h3>
+
+            <div class="parts-section__body" id="templates">
+              {
+                templates.map((template) => (
+                  <Card
+                    data-type="template"
+                    data-id={template.id}
+                    title={template.title}
+                    icon={template.icon}
+                  />
+                ))
+              }
+            </div>
+          </div>
+
+          <div class="parts-section section-collections">
+            <h3>Kollektionen</h3>
+
+            <div class="parts-section__body" id="collections">
+              {
+                collections.map((collection) => (
+                  <Card
+                    data-type="collection"
+                    data-id={collection.id}
+                    title={collection.title}
+                    icon={collection.icon}
+                  />
+                ))
+              }
+            </div>
+          </div>
+          <div class="parts-section section-patters">
+            <h3>Patterns</h3>
+
+            <div class="parts-section__body" id="patterns">
+              {
+                patterns.map((pattern) => (
+                  <Card
+                    data-type="pattern"
+                    data-id={pattern.id}
+                    title={pattern.title}
+                    icon={pattern.icon}
+                  />
+                ))
+              }
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="build-container"></div>
+      <div class="settings-container"></div>
+    </div>
+  </main>
 </Layout>
 
+<script>
+  import Sortable from "sortablejs"
+  import FirstTemplate from "../components/templates/FirstTemplate.astro"
+  const patternsContainer = document.getElementById("patterns")
+  const templatesContainer = document.getElementById("templates")
+  const collectionsContainer = document.getElementById("collections")
+  const buildContainer = document.querySelector(".build-container")
+
+  const groupOptions = {
+    name: "shared",
+    pull: "clone",
+    put: false,
+  }
+
+  const dndOptions = {
+    group: groupOptions,
+    sort: false,
+    animation: 150,
+    onAdd: function (event) {
+      replaceWithComponent(event.item)
+    },
+  }
+
+  const buildOptions = {
+    name: "build",
+    pull: false,
+    put: true,
+  }
+
+  const replaceWithComponent = (item) => {
+    const id = item.dataset.id
+    const type = item.dataset.type
+
+    // const component = [type].find((item) => item.id === id)
+    const component = FirstTemplate
+
+    const newElement = document.createElement("FirstTemplate")
+
+    // newElement.appendChild(component)
+
+    item.parentNode.replaceChild(newElement, item)
+  }
+
+  Sortable.create(patternsContainer, {
+    dndOptions,
+  })
+
+  new Sortable(templatesContainer, {
+    group: groupOptions,
+    onAdd: function (event) {
+      replaceWithComponent(event.item)
+    },
+  })
+
+  new Sortable(collectionsContainer, {
+    group: groupOptions,
+    onAdd: function (event) {
+      replaceWithComponent(event.item)
+    },
+  })
+
+  new Sortable(buildContainer, {
+    group: buildOptions,
+    animation: 150,
+    ghostClass: "sortable-ghost",
+    onAdd: function (event) {
+      replaceWithComponent(event.item)
+    },
+  })
+</script>
+
 <style>
-	main {
-		margin: auto;
-		padding: 1.5rem;
-		max-width: 60ch;
-	}
-	h1 {
-		font-size: 3rem;
-		font-weight: 800;
-		margin: 0;
-	}
-	.text-gradient {
-		background-image: var(--accent-gradient);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-size: 400%;
-		background-position: 0%;
-	}
-	.instructions {
-		line-height: 1.6;
-		margin: 1rem 0;
-		border: 1px solid rgba(var(--accent), 25%);
-		background-color: white;
-		padding: 1rem;
-		border-radius: 0.4rem;
-	}
-	.instructions code {
-		font-size: 0.875em;
-		font-weight: bold;
-		background: rgba(var(--accent), 12%);
-		color: rgb(var(--accent));
-		border-radius: 4px;
-		padding: 0.3em 0.45em;
-	}
-	.instructions strong {
-		color: rgb(var(--accent));
-	}
-	.link-card-grid {
-		display: grid;
-		grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-		gap: 1rem;
-		padding: 0;
-	}
+  .main-container {
+    background: aquamarine;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .parts-container {
+    width: 360px;
+    height: 100%;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .build-container {
+    background: grey;
+    flex-grow: 1;
+    height: 100%;
+  }
+
+  .settings-container {
+    width: 240px;
+    background: lightgrey;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .parts-container__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+  }
+  .parts-container__header__search {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    background: #eee;
+    border-radius: 5px;
+  }
+  .parts-container__header__search input {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    padding: 0 1rem;
+    font-size: 1rem;
+    background: transparent;
+  }
+  .parts-container__header__search input::placeholder {
+    color: #999;
+  }
+  .parts-container__header__search button {
+    border: none;
+    outline: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 0 1rem;
+  }
+
+  .parts-container__body {
+    padding: 1rem;
+    flex-grow: 1;
+    overflow-y: scroll;
+  }
+
+  .parts-section__body {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 0.7rem;
+  }
+  .sortable-ghost {
+    height: 200px;
+    /* width: 200px; */
+    border: 1px dashed #000; // an outline to indicate the size of the component
+  }
 </style>
