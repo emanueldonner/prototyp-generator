@@ -1,0 +1,119 @@
+{% example 'Eingabefeld Standard' %}
+<label for="input-text">
+    Einfaches Eingabefeld
+</label>
+<input type="text" id="input-text" />
+{% endexample %}
+
+
+{% example 'Eingabefeld verpflichtend (mit Sternsymbol)' %}
+<label for="email">
+  E-Mail-Adresse
+  <abbr title="Pflichtfeld">*</abbr>
+</label>
+<input type="email" id="email" autocomplete="email" required />
+{% endexample %}
+
+
+{% example 'Eingabefeld mit Fehler' %}
+<label for="email2">
+  E-Mail-Adresse
+  <abbr title="Pflichtfeld">*</abbr>
+</label>
+
+<input type="email"  id="email2" autocomplete="email" aria-describedby="msg_email2" aria-invalid="true" required />
+<div class="wm-forms-message" id="msg_email2">Eingabe erforderlich</div>
+{% endexample %}
+
+
+{% example 'Select/Dropdown' %}
+<label class="wm-form-label" for="select">
+  Suche
+  <abbr title="Pflichtfeld">*</abbr>
+</label>
+<select id="select" required>
+  <option value="">
+    Bitte wählen sie
+  </option>
+  <option value="1">
+    1. Option
+  </option>
+  <option value="2">
+    2. Option
+  </option>
+  <option selected value="3">
+    3. Option
+  </option>
+</select>
+{% endexample %}
+
+{% example 'Select/Dropdown mit Fehler' %}
+<label for="select-invalid">
+  Suche
+  <abbr title="Pflichtfeld">*</abbr>
+</label>
+<select id="select-invalid" aria-describedby="msg_select-invalid" aria-invalid="true" required>
+  <option selected>
+    Bitte wählen sie
+  </option>
+  <option value="1">
+    1. Option
+  </option>
+  <option value="2">
+    2. Option
+  </option>
+  <option value="3">
+    3. Option
+  </option>
+</select>
+<div class="wm-forms-message" id="msg_select-invalid">Eingabe erforderlich</div>
+{% endexample %}
+
+{% example 'Textfeld' %}
+<label for="textarea">
+  Textfeld
+  <abbr title="Pflichtfeld">*</abbr>
+</label>
+<textarea id="textarea" rows="6" required></textarea>
+{% endexample %}
+
+{% example 'Textfeld mit Fehler' %}
+<label for="textarea-invalid">
+  Textfeld
+  <abbr title="Pflichtfeld">*</abbr>
+</label>
+
+<textarea id="textarea-invalid" rows="8" aria-describedby="msg_textarea-invalid" required aria-invalid="true"></textarea>
+<div class="wm-forms-message" id="msg_textarea-invalid">Eingabe erforderlich</div>
+{% endexample %}
+
+{% example 'Radio-Button' %}
+<input type="radio" id="input-radio" />
+<label for="input-radio">Einfache Auswahl</label>
+{% endexample %}
+
+{% example 'Checkbox' %}
+<input type="checkbox" id="input-checkbox" />
+<label for="input-checkbox">Mehrfach-Auswahl</label>
+{% endexample %}
+
+{% example 'Submit-Button' %}
+<button>Submit</button>
+{% endexample %}
+
+{% example 'Datum' %}
+<label for="input-date">
+  Datum
+</label>
+<input type="date" id="input-date" aria-describedby="msg_input-date" min="2023-01-01" max="2024-12-31" />
+<div class="wm-forms-message" id="msg_input-date">Datumsformat: TT.MM.JJJJ, z.B.: 12.03.1987</div>
+{% endexample %}
+
+{% example 'Schieberegler' %}
+<label for="range_slider">Zoomstufe</label>
+<input type="range" value="7" id="range_slider" min="1" max="15" step="1">
+{% endexample %}
+
+{% example 'Switch' %}
+  <wm-form-toggle label="Cookies akzeptieren"></wm-form-toggle>
+{% endexample %}

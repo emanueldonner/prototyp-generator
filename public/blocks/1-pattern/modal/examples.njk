@@ -1,0 +1,127 @@
+{% example 'Einfaches Modal mit Bild' %}
+  <a href="{{ mock.pattern.images.modal3.url }}" data-modal="image">
+    <img src="{{ mock.pattern.images.image1.src }}" width="530" height="298" alt="{{ mock.pattern.images.image1.alt }}">
+  </a>
+{% endexample %}
+{% example 'Modal mit Bild und Beschreibung' %}
+  <figure>
+    <a href="{{ mock.pattern.images.modal3.url }}" data-modal="image">
+      <img src="{{ mock.pattern.images.modal3.src }}" width="530" height="298" loading="lazy" alt="{{ mock.pattern.images.modal3.alt }}">
+    </a>
+    <figcaption>
+      {{ mock.pattern.images.modal3.caption }}
+    </figcaption>
+  </figure>
+{% endexample %}
+
+{% example 'Modal mit mehreren Bildern' %}
+  <a href="{{ mock.pattern.images.image2.url }}" data-modal="images">
+    <img src="{{ mock.pattern.images.image2.src }}" width="530" height="298" loading="lazy" alt="{{ mock.pattern.images.image2.alt }}">
+  </a>
+{% endexample %}
+
+{% example 'Modal mit mehreren Bildern und Thumbs' %}
+  <a href="{{ mock.pattern.images.image2.url }}" data-modal="images" data-thumbs="thumbs">
+    <img src="{{ mock.pattern.images.image2.src }}" width="530" height="298" loading="lazy" alt="{{ mock.pattern.images.image2.alt }}">
+  </a>
+{% endexample %}
+
+
+{% example 'Modal mit YouTube Video' %}
+  <button data-modal="youtube">Video zeigen</button>     
+{% endexample %}
+
+{% example 'Modal mit ViennaViz Grafik' %}
+  <button data-modal="viennaviz">ViennaViz zeigen</button>
+   
+{% endexample %}
+
+
+{% example 'Sonstiges iframe' %}
+  <button data-modal="sketch">Sketch</button>  
+{% endexample %}
+
+{% example 'wien.gv.at Video' %}
+  <button data-modal="wienvideo">Wien</button>
+
+{% endexample %}
+
+
+
+  <template id="wienvideo">
+    <iframe allowfullscreen width="600" scrolling="auto" loading="lazy" src="https://www.wien.gv.at/video/embed/index.html?mid=2387" title="Marathon-Weltrekordversuch in Wien">
+      <a href="https://www.wien.gv.at/video/embed/index.html?mid=2387">
+        Marathon-Weltrekordversuch in Wien
+      </a>
+    </iframe>
+  </template>  
+
+  <template id="sketch">
+    <div class="sketchfab-embed-wrapper"> <iframe width="500" title="THROTTLE BODY PLATE - 3MM THICK.fbx" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/9YtZ0lMNq6NZt6kA7XYDk4vcGli/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/throttle-body-plate-3mm-thickfbx-9YtZ0lMNq6NZt6kA7XYDk4vcGli?utm_medium=embed&utm_campaign=share-popup&utm_content=9YtZ0lMNq6NZt6kA7XYDk4vcGli" target="_blank" style="font-weight: bold; color: #1CAAD9;"> THROTTLE BODY PLATE - 3MM THICK.fbx </a> by <a href="https://sketchfab.com/jamesstill?utm_medium=embed&utm_campaign=share-popup&utm_content=9YtZ0lMNq6NZt6kA7XYDk4vcGli" target="_blank" style="font-weight: bold; color: #1CAAD9;"> jamesstill </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=9YtZ0lMNq6NZt6kA7XYDk4vcGli" target="_blank" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
+  </template>     
+  
+  <template id="youtube">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/L1Nx8RH5-wA" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </template>   
+  
+  <template id="viennaviz">
+    <iframe width="648" height="499" src="https://stp.wien.gv.at/viennaviz/anonymous/embed.html?id=52826b72-d80b-4f22-92ff-11be7c2b8b34" title="ViennaViz Visualisierung"><p>Keine Unterstützung für iframes in Ihrem Browser</p></iframe>
+  </template>      
+
+<template id="images">
+    <wm-carousel single="1070" style="--carousel-shadow-offset: 0px">
+      <figure>
+        <img src="{{ mock.pattern.images.modal1.src }}" width="{{ mock.pattern.images.modal1.width }}" height="{{ mock.pattern.images.modal1.height }}" alt="{{ mock.pattern.images.modal1.alt }}">
+        <figcaption>{{ mock.pattern.images.modal1.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal2.src }}" width="{{ mock.pattern.images.modal2.width }}" height="{{ mock.pattern.images.modal2.height }}" alt="{{ mock.pattern.images.modal2.alt }}">
+        <figcaption>{{ mock.pattern.images.modal2.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal3.src }}" width="{{ mock.pattern.images.modal3.width }}" height="{{ mock.pattern.images.modal3.height }}" alt="{{ mock.pattern.images.modal3.alt }}">
+        <figcaption>{{ mock.pattern.images.modal3.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal4.src }}" width="{{ mock.pattern.images.modal4.width }}" height="{{ mock.pattern.images.modal4.height }}" alt="{{ mock.pattern.images.modal4.alt }}">
+        <figcaption>{{ mock.pattern.images.modal4.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal5.src }}" width="{{ mock.pattern.images.modal5.width }}" height="{{ mock.pattern.images.modal5.height }}" alt="{{ mock.pattern.images.modal5.alt }}">
+        <figcaption>{{ mock.pattern.images.modal5.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal6.src }}" width="{{ mock.pattern.images.modal6.width }}" height="{{ mock.pattern.images.modal6.height }}" alt="{{ mock.pattern.images.modal6.alt }}">
+        <figcaption>{{ mock.pattern.images.modal6.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal7.src }}" width="{{ mock.pattern.images.modal7.width }}" height="{{ mock.pattern.images.modal7.height }}" alt="{{ mock.pattern.images.modal7.alt }}">
+        <figcaption>{{ mock.pattern.images.modal7.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal8.src }}" width="{{ mock.pattern.images.modal8.width }}" height="{{ mock.pattern.images.modal8.height }}" alt="{{ mock.pattern.images.modal8.alt }}">
+        <figcaption>{{ mock.pattern.images.modal8.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal9.src }}" width="{{ mock.pattern.images.modal9.width }}" height="{{ mock.pattern.images.modal9.height }}" alt="{{ mock.pattern.images.modal9.alt }}">
+        <figcaption>{{ mock.pattern.images.modal9.caption }}</figcaption>
+      </figure>
+      <figure>
+        <img src="{{ mock.pattern.images.modal10.src }}" width="{{ mock.pattern.images.modal10.width }}" height="{{ mock.pattern.images.modal10.height }}" alt="{{ mock.pattern.images.modal10.alt }}">
+        <figcaption>{{ mock.pattern.images.modal10.caption }}</figcaption>
+      </figure>
+    </wm-carousel>
+  </template>
+
+  <template id="thumbs">
+    <img src="{{ mock.pattern.images.modal1.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal1.alt }}">
+    <img src="{{ mock.pattern.images.modal2.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal2.alt }}">
+    <img src="{{ mock.pattern.images.modal3.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal3.alt }}">
+    <img src="{{ mock.pattern.images.modal4.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal4.alt }}">
+    <img src="{{ mock.pattern.images.modal5.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal5.alt }}">
+    <img src="{{ mock.pattern.images.modal6.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal6.alt }}">
+    <img src="{{ mock.pattern.images.modal7.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal7.alt }}">
+    <img src="{{ mock.pattern.images.modal8.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal8.alt }}">
+    <img src="{{ mock.pattern.images.modal9.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal9.alt }}">
+    <img src="{{ mock.pattern.images.modal10.thumb }}" width="44" height="44" alt="{{ mock.pattern.images.modal10.alt }}">
+  </template>

@@ -1,0 +1,25 @@
+{% example 'Standard' %}
+<wm-badge>
+  Tipp
+</wm-badge>
+{% endexample %}
+
+{% example 'Negativ' %}
+<wm-badge color="error">
+  Tipp
+</wm-badge>
+{% endexample %}
+
+{% example 'Badge in Card' %}
+<wm-card>
+  <h2 slot="heading">Stadt ermöglicht Wiener Kindern Urlaub</h2>
+  <div slot="content">
+    <p>Für Familien mit kleinem Einkommen und Kinder von 7 bis 14 Jahren hat Wien noch Plätze.</p>
+  </div>
+  <div slot="postcontent">
+  <wm-badge color="success">
+    Gratis eintritt
+  </wm-badge>
+  </div>
+</wm-card>
+{% endexample %}

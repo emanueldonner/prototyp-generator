@@ -1,0 +1,191 @@
+{% example 'Erst bei 48em Mindestviewportbreite' %}
+<wm-toggle min="48em">
+  <span slot="label">Beschreibung</span>
+  <div slot="content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos ullam ut minus aut ipsa rerum quibusdam expedita necessitatibus magni voluptatum, laborum iure perspiciatis cum velit voluptas quod? Ipsa, facilis. velit voluptas quod? Ipsa, facilis</div>
+</wm-toggle>  
+{% endexample %}
+
+{% example 'Standardmäßig offen' %}
+<wm-toggle open>
+  <span slot="label">Beschreibung</span>
+  <div slot="content">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima dignissimos ullam ut minus aut ipsa rerum quibusdam expedita necessitatibus magni voluptatum, laborum iure perspiciatis cum velit voluptas quod? Ipsa, facilis. velit voluptas quod? Ipsa, facilis</div>
+</wm-toggle>
+{% endexample %}
+
+ 
+
+
+{% example 'Toggle mit Rahmen' %}
+<style>
+  .filter-toggle {
+    --toggle-padding: 0; 
+    --toggle-border: 1px solid var(--wm-color-nebelgrau); 
+    --toggle-padding-content: var(--wm-spacing-s) var(--wm-spacing-l); 
+    --toggle-padding-button: var(--wm-spacing-s) var(--wm-spacing-l) var(--wm-spacing-s) var(--wm-spacing-s);
+  }
+</style>
+
+<wm-toggle full class="filter-toggle">
+  <span slot="label"><strong>Erweitere Filtersuche</strong> (2)</span>
+  <div slot="content">
+    <wm-grid gap="s">
+      <div>
+        <wm-filter id="sprachen" type="dropdown" label="Sprachen">
+          <fieldset>
+            <legend>Alle Sprachen</legend>
+            
+            <div>
+              <input id="deutsch" type="checkbox" name="sprache" value="de">
+              <label for="deutsch">Deutsch (4494)</label>
+            </div>
+            <div>
+              <input id="englisch" type="checkbox" name="sprache" value="en">
+              <label for="englisch">Englisch (1033)</label>
+            </div>
+          </fieldset>
+        </wm-filter>
+      </div>                
+      <div>
+        <wm-filter id="verlage" type="dropdown" label="Verlage">
+          <fieldset>
+            <legend>Alle Verlage</legend>
+            
+            <div>
+              <input id="verlag1" type="checkbox" name="verlag" value="verlag1">
+              <label for="verlag1">Verlag 1</label>
+            </div>
+      
+            <div>
+              <input id="verlag2" type="checkbox" name="verlag" value="verlag2">
+              <label for="verlag2">Verlag 2</label>
+            </div>
+      
+            <div>
+              <input id="verlag3" type="checkbox" name="verlag" value="verlag3">
+              <label for="verlag3">Verlag 3</label>
+            </div>
+      
+            <div>
+              <input id="verlag4" type="checkbox" name="verlag" value="verlag4">
+              <label for="verlag4">Verlag 4</label>
+            </div>
+      
+          </fieldset>
+        </wm-filter>
+      </div>
+      <div>
+        <wm-filter id="verlagsorte" type="dropdown" label="Verlagsorte">
+          <fieldset>
+            <legend>Alle Verlagsorte</legend>
+            
+            <div>
+              <input id="verlagsort1" type="checkbox" name="verlagsort" value="verlagsort1">
+              <label for="verlagsort1">Verlagsort 1</label>
+            </div>
+      
+            <div>
+              <input id="verlagsort2" type="checkbox" name="verlagsort" value="verlagsort2">
+              <label for="verlagsort2">Verlagsort 2</label>
+            </div>
+      
+            <div>
+              <input id="verlagsort3" type="checkbox" name="verlagsort" value="verlagsort3">
+              <label for="verlagsort3">Verlagsort 3</label>
+            </div>
+      
+            <div>
+              <input id="verlagsort4" type="checkbox" name="verlagsort" value="verlagsort4">
+              <label for="verlagsort4">Verlagsort 4</label>
+            </div>
+      
+          </fieldset>
+        </wm-filter>
+      </div>
+      <div>
+        <wm-filter id="themen" type="dropdown" label="Themen">
+          <fieldset>
+            <legend>Alle Themen</legend>
+            
+            <div>
+              <input id="themen1" type="checkbox" name="thema" value="themen1">
+              <label for="themen1">Thema 1</label>
+            </div>
+      
+            <div>
+              <input id="themen2" type="checkbox" name="thema" value="themen2">
+              <label for="themen2">Thema 2</label>
+            </div>
+      
+            <div>
+              <input id="themen3" type="checkbox" name="thema" value="themen3">
+              <label for="themen3">Thema 3</label>
+            </div>
+      
+            <div>
+              <input id="themen4" type="checkbox" name="thema" value="themen4">
+              <label for="themen4">Thema 4</label>
+            </div>
+      
+          </fieldset>
+        </wm-filter>
+      </div>
+      <div>
+        <wm-filter id="formate" type="dropdown" label="Formate">
+          <fieldset>
+            <legend>Alle Formate</legend>
+            
+            <div>
+              <input id="formate1" type="checkbox" name="format" value="formate1">
+              <label for="formate1">Format 1</label>
+            </div>
+      
+            <div>
+              <input id="formate2" type="checkbox" name="format" value="formate2">
+              <label for="formate2">Format 2</label>
+            </div>
+      
+            <div>
+              <input id="formate3" type="checkbox" name="format" value="formate3">
+              <label for="formate3">Format 3</label>
+            </div>
+      
+            <div>
+              <input id="formate4" type="checkbox" name="format" value="formate4">
+              <label for="formate4">Format 4</label>
+            </div>
+      
+          </fieldset>
+        </wm-filter>
+      </div>
+      <div>
+        <wm-filter id="personen" type="dropdown" label="Personen">
+          <fieldset>
+            <legend>Alle Personen</legend>
+            
+            <div>
+              <input id="personen1" type="checkbox" name="personen" value="personen1">
+              <label for="personen1">Person 1</label>
+            </div>
+      
+            <div>
+              <input id="personen2" type="checkbox" name="personen" value="personen2">
+              <label for="personen2">Person 2</label>
+            </div>
+      
+            <div>
+              <input id="personen3" type="checkbox" name="personen" value="personen3">
+              <label for="personen3">Person 3</label>
+            </div>
+      
+            <div>
+              <input id="personen4" type="checkbox" name="personen" value="personen4">
+              <label for="personen4">Person 4</label>
+            </div>
+      
+          </fieldset>
+        </wm-filter>
+      </div>
+    </wm-grid>
+  </div>
+</wm-toggle>  
+{% endexample %}

@@ -1,4 +1,5 @@
 ---
+import initSqlJs from "sql.js"
 import Layout from "../layouts/Layout.astro"
 import Card from "../components/Card.astro"
 import { componentList } from "../componentList"
@@ -6,6 +7,17 @@ import { componentList } from "../componentList"
 import { templates, collections, patterns } from "../testdata"
 
 const toggleState = true
+
+// const initSqlJs = window.initSqlJs;
+
+const SQL = await initSqlJs({
+  // Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
+  // You can omit locateFile completely when running in node
+  locateFile: (file) => `../${file}`,
+})
+
+const db = new SQL.Database()
+console.log("db", db)
 ---
 
 <Layout title="Prototyp Generator">
@@ -13,7 +25,6 @@ const toggleState = true
     <div class="main-container">
       <div class="parts-container">
         <div class="parts-container__header">
-          <div class="info-button">I</div>
           <!-- button that toggles visibility of parts-container -->
           <div class="toggle-class"><span class="burger"></span></div>
 
@@ -93,7 +104,6 @@ const toggleState = true
 
 <script>
   import Sortable from "sortablejs"
-  import FirstTemplate from "../components/templates/FirstTemplate.astro"
   const patternsContainer = document.getElementById("patterns")
   const templatesContainer = document.getElementById("templates")
   const collectionsContainer = document.getElementById("collections")
@@ -131,13 +141,18 @@ const toggleState = true
     const tag = item.dataset.tag
     console.log("tag", tag)
     const type = item.dataset.type
-
+    const id = item.dataset.id
     // const component = [type].find((item) => item.id === id)
-    const component = FirstTemplate
 
-    const newElement = document.createElement(tag)
+    const newElement = document.createElement("div")
 
-    newElement.innerHTML = component
+    // fetch .html file content and add it to the new element
+    fetch(`/blocks/1-${type}/${id}/code.html`)
+      .then((response) => response.text())
+      .then((data) => {
+        console.log("data", data)
+        newElement.innerHTML = data
+      })
 
     item.parentNode.replaceChild(newElement, item)
   }
@@ -160,7 +175,6 @@ const toggleState = true
 
 <style>
   .main-container {
-    background: aquamarine;
     width: 100vw;
     height: 100vh;
     display: flex;
@@ -237,7 +251,7 @@ const toggleState = true
     }
   }
   .build-container {
-    background: grey;
+    background: #fff;
     flex-grow: 1;
     height: 100%;
   }

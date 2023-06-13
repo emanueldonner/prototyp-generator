@@ -1,0 +1,7 @@
+{% example 'Bäderampel' %}
+<wm-fetch dataset="features" url="https://data.wien.gv.at/daten/geo?service=WFS&request=GetFeature&version=1.1.0&typeName=ogdwien:SCHWIMMBADOGD&srsName=EPSG:4326&outputFormat=json&cql_filter=strIndexOf(WEBLINK1%2C%27amalienbad%27)%3E-1">
+  <div slot="results">
+    <wm-status data-fetch-attributes data-fetch-attribute1="statusText:properties.AUSLASTUNG_AMPEL_KAT_TXT_0" data-fetch-attribute2="status:properties.AUSLASTUNG_AMPEL_KATEGORIE_0"></wm-status>
+  </div>
+</wm-fetch>
+{% endexample %}

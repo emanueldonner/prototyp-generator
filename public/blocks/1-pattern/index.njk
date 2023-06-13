@@ -1,0 +1,21 @@
+---
+title: Patterns
+layout: page.njk
+eleventyNavigation:
+  key: Patterns
+  parent: Pattern Library
+date: 2023-01-01
+---
+<wm-quicklinks>
+  <ul>
+    {% for pattern in collections.patterns %}
+      <li>
+        <wm-cta full="true">
+          <a href="{{ pattern.url }}">
+            {{ pattern.data.title }}
+          </a>
+        </wm-cta>
+      </li>
+    {% endfor %}
+  </ul>
+</wm-quicklinks>

@@ -1,0 +1,37 @@
+{% example 'Tabs mit benutzerdefiniertem Styling' %}
+<wm-tabs class="custom-tabs">
+  <wm-tab slot="tab">Tab 1</wm-tab>
+  <wm-tabpanel class="code-preview-rendered">
+    Inhalt 1
+  </wm-tabpanel>
+
+  <wm-tab slot="tab">Tab 2</wm-tab>
+  <wm-tabpanel>
+    <div class="code-preview">
+    Inhalt 2
+    </div>
+  </wm-tabpanel>
+</wm-tabs>
+
+<style>
+  .custom-tabs {
+    --tabs-gap: var(--wm-spacing-xs);
+    --tabs-spacing: var(--wm-spacing-s);
+  }
+
+  .custom-tabs > wm-tab {
+    --tab-background-color: transparent;
+    --tab-background-color-selected: transparent;
+    --tab-border-width: 0 0 2px 0;
+    --tab-border-color: transparent;
+    --tab-border-color-selected: var(--wm-color-fastschwarz);
+    --tab-padding: 0;
+  }
+
+  .custom-tabs > wm-tabpanel {
+    --tabpanel-padding: 0;
+    --tabpanel-border-width: 0;
+    --tabpanel-border-color: transparent;
+  }
+</style>
+{% endexample %}

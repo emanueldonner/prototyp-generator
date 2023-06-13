@@ -1,0 +1,154 @@
+{% example 'Card mit Text und Button' %}
+<wm-card>
+  <div slot="content">
+    <p>Wenn Sie sich testen lassen wollen, gibt es in Wien verschiedene kostenfreie Angebote.</p>
+    <wm-button full="true">
+      <button>
+        <wm-icon iconid="microscope"></wm-icon>
+        Testangebote
+      </button>
+    <wm-button>
+  </div>
+</wm-card>
+{% endexample %}
+
+{% example 'Card mit Tags' %}
+<wm-card size="l">
+  <h3 slot="heading">
+    Öffnungszeiten
+  </h3>
+  <div slot="content">
+    <p>
+      Montag bis Freitag: 9 bis 20 Uhr<br />
+      Samstag, Sonntag und Feiertage: 8 bis 20 Uhr
+    </p>
+    <p>
+      <strong>Ab 1. September:</strong><br />
+      Montag bis Freitag: 9 bis 19 Uhr<br />
+      Samstag, Sonntag und Feiertage: 8 bis 19 Uhr
+    </p>
+  </div>
+
+  <div slot="postcontent">
+    <wm-tag>
+      <a href="#">
+        Baden
+      </a>
+    </wm-tag>
+    <wm-tag>
+      <a href="#">
+        Radfahren
+      </a>
+    </wm-tag>
+  </div>
+</wm-card>
+{% endexample %}
+
+{% example 'Große Card' %}
+<wm-card size="l">
+  <h3 slot="heading">
+    Stadt ermöglicht Wiener Kindern Urlaub
+  </h3>
+  <div slot="content">
+    <p>Für Familien mit kleinem Einkommen und Kinder von 7 bis 14 Jahren hat Wien noch Plätze.</p>
+  </div>
+  <img slot="media" src="/images/pattern/cards/kinderurlaub.jpg" width="530" height="298">
+</wm-card>
+{% endexample %}
+
+
+{% example 'Infobox' %}
+<wm-card size="default">
+  <wm-stack slot="content" equal="true" wrap="false" gap="l">
+    <wm-list type="row">
+      <ul>
+        <li>
+          <wm-icon iconid="clock"></wm-icon>
+          Stand: Grundlagenerhebung
+        </li>
+        <li>
+          <wm-icon iconid="pin"></wm-icon>
+          <a href="#">
+            15., Umgebung Westbahnhof
+          </a>
+        </li>
+        <li>
+          <wm-icon iconid="contact_alternative"></wm-icon>
+          Beteiligung: Offen
+        </li>
+        <li>
+          <wm-icon iconid="info"></wm-icon>
+          <a href="https://www.mitte15.at/">Mitte 15 - Du und dein Grätzl. Gestalte mit!</a>
+        </li>
+      </ul>
+    </wm-list>
+
+    <figure>
+      <a href="{{ mock.pattern.images.modal1.url }}" data-modal="images">
+        <img src="{{ mock.pattern.images.modal1.src }}" width="530" alt="{{ mock.pattern.images.modal1.alt }}">
+      </a>
+      <figcaption>
+        {{ mock.pattern.images.modal1.caption }}
+      </figcaption>
+    </figure>
+
+    <template id="images">
+      <wm-carousel single="1070" style="--carousel-shadow-offset: 0px">
+        <figure>
+          <img src="{{ mock.pattern.images.modal2.src }}" width="{{ mock.pattern.images.modal2.width }}" height="{{ mock.pattern.images.modal2.height }}" alt="{{ mock.pattern.images.modal2.alt }}">
+
+          <figcaption>
+            {{ mock.pattern.images.modal2.caption }}
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="{{ mock.pattern.images.modal3.src }}" width="{{ mock.pattern.images.modal2.width }}" height="{{ mock.pattern.images.modal2.height }}" alt="{{ mock.pattern.images.modal3.alt }}">
+
+          <figcaption>
+            {{ mock.pattern.images.modal3.caption }}
+          </figcaption>
+        </figure>
+        <figure>
+          <img src="{{ mock.pattern.images.modal4.src }}" width="{{ mock.pattern.images.modal2.width }}" height="{{ mock.pattern.images.modal2.height }}" alt="{{ mock.pattern.images.modal4.alt }}">
+
+          <figcaption>
+            {{ mock.pattern.images.modal4.caption }}
+          </figcaption>
+        </figure>
+      </wm-carousel>
+    </template>
+  </wm-stack>
+</wm-card>
+{% endexample %}
+
+
+{% example 'Infobox ohne Bild' %}
+<wm-card size="l">
+<wm-list type="row" slot="content">
+  <ul>
+    <li>
+      <wm-icon iconid="clock"></wm-icon>
+      Stand: Grundlagenerhebung
+    </li>
+    <li>
+      <wm-icon iconid="pin"></wm-icon>
+      <a href="#">
+        15., Umgebung Westbahnhof
+      </a>
+    </li>
+    <li>
+      <wm-icon iconid="contact_alternative"></wm-icon>
+      Beteiligung: Offen
+    </li>
+    <li>
+      <wm-icon iconid="info"></wm-icon>
+      <p>
+        <a href="https://www.mitte15.at/">Mitte 15 - Du und dein Grätzl. Gestalte mit!</a><br>
+        <a href="https://www.mitte15.at/">Weiterer Link</a>
+      </p>
+    </li>
+  </ul>
+</wm-list>
+
+</wm-card>
+{% endexample %}

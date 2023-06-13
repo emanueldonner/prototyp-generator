@@ -1,0 +1,22 @@
+{% example 'Login Formular' %}
+<form id="login" method="POST" action="#">
+  <div>
+    <label for="username">
+      Benutzername
+      <abbr title="Pflichtfeld">*</abbr>
+    </label>
+
+    <input type="text" name="username" id="username" autocomplete="username" required />
+  </div>
+
+  <div>
+    <label for="current-password">
+      Passwort
+      <abbr title="Pflichtfeld">*</abbr>
+    </label>
+    <input type="password" name="current-password" id="current-password" autocomplete="current-password" required />
+  </div>
+
+  <button>Anmelden</button>
+</form>
+{% endexample %}

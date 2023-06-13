@@ -1,0 +1,42 @@
+<form>
+  <wm-filter id="meinfilter" type="dropdown" data-demo-pattern="wm-filter-preview" controls="true">
+    <fieldset>
+      <legend>Art des Bades</legend>
+      
+      <div>
+        <input id="hallenbad" type="checkbox" name="typ" value="hallenbad">
+        <label for="hallenbad">Hallenbad</label>
+      </div>
+      <div>
+        <input id="freibad" type="checkbox" name="typ" value="freibad">
+        <label for="freibad">Freibad</label>
+      </div>
+      <div>
+        <input id="familienbaeder" type="checkbox" name="typ" value="familienbaeder">
+        <label for="familienbaeder">Familienbäder</label>
+      </div>
+      <div>
+        <input id="bad123123" type="checkbox" name="typ" value="saunabad">
+        <label for="bad123123">Saunabad</label>
+      </div>
+      <div>
+        <input id="brausebad-2" type="checkbox" name="typ" value="brausebad-2">
+        <label for="brausebad-2">Brausebad</label>
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>Bezirk</legend>
+      
+      <div>
+        <input id="bezirk1" type="checkbox" name="bezirk" value="bezirk1">
+        <label for="bezirk1">Innere Stadt</label>
+      </div>
+      <div>
+        <input id="bezirk2" type="checkbox" name="bezirk" value="bezirk2">
+        <label for="bezirk2">Leopoldstadt</label>
+      </div>
+    </fieldset>
+  </wm-filter>
+</form>
+
+<wm-filter-selection filterid="meinfilter"></wm-filter-selection>
