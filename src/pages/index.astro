@@ -1,120 +1,110 @@
 ---
-import initSqlJs from "sql.js"
 import Layout from "../layouts/Layout.astro"
-import Card from "../components/Card.astro"
-import { componentList } from "../componentList"
+import BuildContainer from "../components/BuildContainer/BuildContainer.jsx"
 
-import { templates, collections, patterns } from "../testdata"
+const itemConfigs = await Astro.glob("../../public/blocks/**/*.md")
+
+const configObj = itemConfigs.reduce((obj, item) => {
+  obj[item.frontmatter.token] = item.frontmatter
+  return obj
+}, {})
 
 const toggleState = true
-
-// const initSqlJs = window.initSqlJs;
-
-const SQL = await initSqlJs({
-  // Required to load the wasm binary asynchronously. Of course, you can host it wherever you want
-  // You can omit locateFile completely when running in node
-  locateFile: (file) => `../${file}`,
-})
-
-const db = new SQL.Database()
-console.log("db", db)
 ---
 
 <Layout title="Prototyp Generator">
   <main>
-    <div class="main-container">
-      <div class="parts-container">
-        <div class="parts-container__header">
-          <!-- button that toggles visibility of parts-container -->
-          <div class="toggle-class"><span class="burger"></span></div>
-
-          <!-- <div class="parts-container__header__search">
-            <input type="text" placeholder="Search" value="" />
-
-            <button> Suchen</button>
-          </div> -->
-        </div>
-
-        <div class="parts-container__body">
-          <div class="parts-section section-templates">
-            <wm-toggle full open="true">
-              <span slot="label">Vorlagen</span>
-
-              <div slot="content" class="parts-section__body" id="templates">
-                {
-                  templates.map((template) => (
-                    <div
-                      data-id={template.name}
-                      data-type="template"
-                      data-id={template.id}
-                    >
-                      <Card title={template.title} icon={template.icon} />
-                    </div>
-                  ))
-                }
-              </div>
-            </wm-toggle>
-          </div>
-
-          <div class="parts-section section-collections">
-            <wm-toggle full open="true">
-              <span slot="label">Kollektionen</span>
-
-              <div slot="content" class="parts-section__body" id="collections">
-                {
-                  collections.map((collection) => (
-                    <div
-                      data-type="collection"
-                      data-type="collection"
-                      data-id={collection.id}
-                    >
-                      <Card title={collection.title} icon={collection.icon} />
-                    </div>
-                  ))
-                }
-              </div>
-            </wm-toggle>
-          </div>
-          <div class="parts-section section-patters">
-            <wm-toggle full open="true">
-              <span slot="label">Patterns</span>
-
-              <div slot="content" class="parts-section__body" id="patterns">
-                {
-                  componentList.map((pattern) => (
-                    <div
-                      data-type="pattern"
-                      data-id={pattern.name}
-                      data-tag={pattern.tag}
-                    >
-                      <Card title={pattern.title} icon="dashboard" />
-                    </div>
-                  ))
-                }
-              </div>
-            </wm-toggle>
-          </div>
-        </div>
-      </div>
-      <div class="build-container"></div>
-      <div class="settings-container"></div>
-    </div>
+    <BuildContainer client:load />
   </main>
 </Layout>
 
-<script>
+<!-- <script>
   import Sortable from "sortablejs"
   const patternsContainer = document.getElementById("patterns")
   const templatesContainer = document.getElementById("templates")
   const collectionsContainer = document.getElementById("collections")
   const buildContainer = document.querySelector(".build-container")
 
+  import { dropRules } from "../drop_rules"
   // Toggle class of parts-container
   const toggleClass = document.querySelector(".toggle-class")
   toggleClass.addEventListener("click", () => {
     const partsContainer = document.querySelector(".parts-container")
     partsContainer.classList.toggle("minimized")
   })
+
+  function canDrop(itemId, targetListId) {
+    // Get the rule for this item type
+    const rule = dropRules[itemId]
+    console.log("rule:", rule)
+
+    // If no rule is defined for this item, let's be permissive and allow the drop
+    if (!rule) {
+      return true
+    }
+
+    // If the target list is the 'buildContainer' and 'main' is not a permitted parent, disallow drop
+    if (targetListId === "canvas") {
+      console.log("canvas")
+      if (rule.parents.includes("main")) {
+        return true
+      } else {
+        return false
+      }
+    }
+    console.log("cannot drop here")
+
+    // If the rule has a 'parents' field, check that the target list type is allowed
+    if (rule.parents && !rule.parents.includes(targetListId)) {
+      return false
+    }
+
+    // If the rule has a 'limit' field, check that the target list does not already contain the maximum number of items of this type
+    if (rule.limit) {
+      const numExistingItems = document.querySelectorAll(
+        `[data-id=${itemId}]`
+      ).length
+      if (numExistingItems >= rule.limit) {
+        return false
+      }
+    }
+
+    // If none of the checks failed, the drop is allowed
+    return true
+  }
+
+  function onStart(evt) {
+    evt.item.dataset.type = evt.item.getAttribute("data-component-type")
+  }
+
+  function onEnd(evt) {
+    evt.item.classList.remove("can-drop", "cannot-drop")
+  }
+
+  function onAdd(event) {
+    replaceWithComponent(event.item)
+  }
+
+  function onSort(evt) {
+    const itemType = evt.item.dataset.ptype
+    const listType = evt.to.dataset.ptype
+
+    if (!canDrop(itemType, listType)) {
+      Sortable.active.sortable.cancel()
+    }
+  }
+  function onMove(evt) {
+    const itemId = evt.dragged.dataset.id
+    const targetListId = evt.to.dataset.id
+    console.log("targetListId:", targetListId)
+
+    if (!canDrop(itemId, targetListId)) {
+      evt.dragged.classList.add("cannot-drop")
+      return false // This will prevent the sort operation.
+    } else {
+      evt.dragged.classList.add("can-drop")
+    }
+  }
 
   const groupOptions = {
     name: "shared",
@@ -126,35 +116,64 @@ console.log("db", db)
     group: groupOptions,
     sort: false,
     animation: 150,
-    onAdd: function (event) {
-      replaceWithComponent(event.item)
-    },
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    onStart,
+    onEnd,
+    onAdd,
+    onSort,
+    onMove,
   }
 
   const buildOptions = {
     name: "build",
     pull: false,
     put: true,
+    fallbackOnBody: true,
+    swapThreshold: 0.65,
+    onStart,
+    onEnd,
+    onAdd,
+    onSort,
+    onMove,
   }
 
   const replaceWithComponent = (item) => {
     const tag = item.dataset.tag
-    console.log("tag", tag)
-    const type = item.dataset.type
+    const ptype = item.dataset.ptype
     const id = item.dataset.id
-    // const component = [type].find((item) => item.id === id)
+    console.log(item, id, ptype, tag)
 
     const newElement = document.createElement("div")
+    newElement.dataset.ptype = ptype
+    newElement.dataset.tag = tag
+    newElement.classList.add("sortable-list")
+    // Create a unique id based on the old id and a timestamp
+    newElement.id = `sortable-list-${id}-${Date.now()}`
+
+    // Add sortable properties to the new element
+    new Sortable(newElement, {
+      group: buildOptions,
+      animation: 150,
+      ghostClass: "sortable-ghost",
+      fallbackOnBody: true,
+      swapThreshold: 0.65,
+      onAdd: function (event) {
+        replaceWithComponent(event.item)
+      },
+      onMove: function (evt, originalEvent) {
+        return canDrop(evt.dragged.dataset.id, evt.to.id)
+      },
+    })
 
     // fetch .html file content and add it to the new element
-    fetch(`/blocks/1-${type}/${id}/code.html`)
+    fetch(`/blocks/1-${ptype}/${id}/code.html`)
       .then((response) => response.text())
       .then((data) => {
         console.log("data", data)
         newElement.innerHTML = data
+        item.parentNode.replaceChild(newElement, item)
       })
-
-    item.parentNode.replaceChild(newElement, item)
   }
 
   Sortable.create(patternsContainer, dndOptions)
@@ -171,133 +190,4 @@ console.log("db", db)
       replaceWithComponent(event.item)
     },
   })
-</script>
-
-<style>
-  .main-container {
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .toggle-class {
-    position: absolute;
-    right: 2rem;
-    top: 0.5rem;
-    width: 26px;
-    height: 26px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    background: transparent;
-    border: 5px solid transparent;
-    border-radius: 50%;
-    transition: all 0.3s ease;
-    .burger,
-    .burger::before,
-    .burger::after {
-      content: "";
-      position: absolute;
-      height: 2px;
-      width: 100%;
-      background: #555;
-      transition: all 0.3s ease;
-    }
-
-    .burger {
-      background: transparent;
-    }
-    .burger::before {
-      transform: translateY(0) rotate(45deg);
-    }
-    .burger::after {
-      transform: translateY(0) rotate(-45deg);
-    }
-  }
-  .parts-container {
-    position: relative;
-    width: 360px;
-    height: 100%;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-    transition: width 0.3s ease;
-  }
-  .parts-container.minimized {
-    width: 0px;
-
-    .toggle-class {
-      transform: translateX(4.5rem);
-      background: aqua;
-      border: 5px solid aqua;
-      opacity: 0.5;
-      /* box-shadow: 0 2px 3px rgba(0, 0, 0, 0.3); */
-    }
-    .toggle-class:hover {
-      opacity: 1;
-    }
-    .burger::before {
-      transform: translateY(-3px);
-    }
-
-    .burger::after {
-      transform: translateY(3px);
-    }
-    .parts-container__body {
-      display: none;
-    }
-  }
-  .build-container {
-    background: #fff;
-    flex-grow: 1;
-    height: 100%;
-  }
-
-  .settings-container {
-    width: 240px;
-    background: lightgrey;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .parts-container__header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 2px;
-    height: 30px;
-  }
-  .parts-container__header__search {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    height: 40px;
-  }
-
-  .parts-container__body {
-    padding: 0.4rem 1rem 1rem;
-    flex-grow: 1;
-    overflow-y: scroll;
-    margin: 0.5rem 0;
-  }
-
-  .parts-section {
-    margin-bottom: 1rem;
-  }
-  .parts-section__body {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0.7rem;
-    /* margin: 0.5rem 0; */
-  }
-  .sortable-ghost {
-    height: 200px;
-    /* width: 200px; */
-    border: 1px dashed #000; // an outline to indicate the size of the component
-  }
-</style>
+</script> -->

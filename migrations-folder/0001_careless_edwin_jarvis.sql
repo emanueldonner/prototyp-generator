@@ -1,0 +1,1 @@
+ALTER TABLE prototypes ADD `title` text;
